@@ -43,7 +43,9 @@ def initialize_session(session_id: str):
         model = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0.3)
         
         # Load and split the PDF
-        pdf_file = "/app/data/DataSetPdf (1).pdf"  # Adjust path for your deployment
+        pdf_file = "./data/DataSetPdf (1).pdf"  # Adjust path for your deployment
+        if not os.path.exists(pdf_file):
+            raise FileNotFoundError(f"PDF file not found at {pdf_file}")
         pdf_loader = PyPDFLoader(pdf_file)
         pages = pdf_loader.load_and_split()
         
